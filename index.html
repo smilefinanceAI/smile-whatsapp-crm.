@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smile Financial Solution | Command Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="flex h-screen">
+        <div class="w-64 bg-slate-800 text-white flex flex-col p-4">
+            <h1 class="text-xl font-bold mb-8 border-b border-gray-600 pb-2">SMILE FINANCE</h1>
+            <nav class="space-y-4">
+                <a href="#" class="block p-2 bg-blue-600 rounded flex items-center"><i class="fas fa-bullhorn mr-2"></i> Campaigns</a>
+                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-inbox mr-2"></i> Live Inbox</a>
+                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-chart-line mr-2"></i> Analytics</a>
+                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-cog mr-2"></i> Settings</a>
+            </nav>
+        </div>
+
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <header class="bg-white shadow p-4 flex justify-between items-center">
+                <h2 class="text-lg font-semibold text-gray-700">WhatsApp Campaign Manager</h2>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-500">Admin: <strong>Mohmmad Aarif</strong></span>
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                </div>
+            </header>
+
+            <main class="flex-1 overflow-y-auto p-6 space-y-6">
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">Create Bulk Campaign</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600">Numbers (Comma Separated)</label>
+                                <textarea id="phoneNumbers" rows="3" class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500" placeholder="919773XXXX, 917290XXXX"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-600">Message/Caption</label>
+                                <textarea id="messageBody" rows="4" class="w-full mt-1 p-2 border rounded" placeholder="Hello {{name}}, your loan amount is {{amount}}..."></textarea>
+                            </div>
+                            <button onclick="sendCampaign()" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700 transition">
+                                <i class="fas fa-paper-plane mr-2"></i> Start Campaign
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow">
+                        <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">Real-time Activity</h3>
+                        <div class="h-64 overflow-y-auto space-y-3" id="activityLogs">
+                            <p class="text-sm text-gray-500 italic text-center py-10">Waiting for campaign to start...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <script>
+        function sendCampaign() {
+            const numbers = document.getElementById('phoneNumbers').value;
+            const message = document.getElementById('messageBody').value;
+            if(!numbers || !message) {
+                alert("Please fill all details!");
+                return;
+            }
+            // Isme hum baad mein Firebase connection add karenge
+            alert("System Ready: Integrating with Firebase...");
+        }
+    </script>
+</body>
+</html>
