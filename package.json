@@ -1,0 +1,15 @@
+{
+  "name": "smile-whatsapp-crm",
+  "version": "1.0.0",
+  "description": "WhatsApp Marketing Tool for Smile Finance",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0",
+    "firebase-admin": "^11.0.0",
+    "puppeteer": "^21.0.0"
+  }
+}
