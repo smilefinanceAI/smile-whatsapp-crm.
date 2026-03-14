@@ -3,75 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smile Financial Solution | Command Center</title>
+    <title>Smile Financial Solution | Professional CRM</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 font-sans">
+<body class="bg-slate-100 font-sans">
 
-    <div class="flex h-screen">
-        <div class="w-64 bg-slate-800 text-white flex flex-col p-4">
-            <h1 class="text-xl font-bold mb-8 border-b border-gray-600 pb-2">SMILE FINANCE</h1>
-            <nav class="space-y-4">
-                <a href="#" class="block p-2 bg-blue-600 rounded flex items-center"><i class="fas fa-bullhorn mr-2"></i> Campaigns</a>
-                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-inbox mr-2"></i> Live Inbox</a>
-                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-chart-line mr-2"></i> Analytics</a>
-                <a href="#" class="block p-2 hover:bg-slate-700 rounded flex items-center"><i class="fas fa-cog mr-2"></i> Settings</a>
+    <div id="login-screen" class="fixed inset-0 bg-slate-900 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-96">
+            <h2 class="text-2xl font-bold text-slate-800 mb-6 text-center underline decoration-blue-500">Aarif's Admin Login</h2>
+            <input type="email" id="userEmail" placeholder="Email Address" class="w-full p-3 mb-4 border rounded focus:outline-blue-500">
+            <input type="password" id="userPass" placeholder="Password" class="w-full p-3 mb-6 border rounded focus:outline-blue-500">
+            <button onclick="handleLogin()" class="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 transition">SECURE LOGIN</button>
+        </div>
+    </div>
+
+    <div id="main-dashboard" class="hidden flex h-screen">
+        <div class="w-64 bg-slate-800 text-white flex flex-col p-4 shadow-xl">
+            <div class="text-center mb-10 mt-4">
+                <span class="text-2xl font-black tracking-tighter text-blue-400">SMILE FINANCE</span>
+                <p class="text-xs text-slate-400">Command Center v2.0</p>
+            </div>
+            <nav class="space-y-4 flex-1">
+                <button onclick="showPanel('campaign')" class="w-full text-left p-3 bg-blue-600 rounded flex items-center shadow-md">
+                    <i class="fas fa-paper-plane mr-3"></i> Bulk Campaign
+                </button>
+                <button onclick="showPanel('inbox')" class="w-full text-left p-3 hover:bg-slate-700 rounded flex items-center transition">
+                    <i class="fas fa-comment-dots mr-3"></i> Live Chat Inbox
+                </button>
+                <button onclick="showPanel('analytics')" class="w-full text-left p-3 hover:bg-slate-700 rounded flex items-center transition">
+                    <i class="fas fa-chart-pie mr-3"></i> Reports & Tracking
+                </button>
             </nav>
+            <button onclick="logout()" class="text-sm text-slate-500 hover:text-red-400 p-2"><i class="fas fa-power-off mr-2"></i> Logout</button>
         </div>
 
         <div class="flex-1 flex flex-col overflow-hidden">
-            <header class="bg-white shadow p-4 flex justify-between items-center">
-                <h2 class="text-lg font-semibold text-gray-700">WhatsApp Campaign Manager</h2>
+            <header class="bg-white p-4 border-b flex justify-between items-center px-8 shadow-sm">
+                <h2 id="panel-title" class="text-xl font-bold text-slate-700">Campaign Manager</h2>
                 <div class="flex items-center space-x-4">
-                    <span class="text-sm text-gray-500">Admin: <strong>Mohmmad Aarif</strong></span>
-                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">A</div>
+                    <div class="text-right">
+                        <p class="text-sm font-bold leading-none">Md Aarif</p>
+                        <span class="text-[10px] text-green-500 font-bold uppercase tracking-widest">Global Admin</span>
+                    </div>
+                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-700 rounded-full flex items-center justify-center text-white font-bold shadow-lg">MA</div>
                 </div>
             </header>
 
-            <main class="flex-1 overflow-y-auto p-6 space-y-6">
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">Create Bulk Campaign</h3>
-                        <div class="space-y-4">
+            <main class="flex-1 overflow-y-auto p-8">
+                <div id="panel-campaign" class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fadeIn">
+                    <div class="lg:col-span-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-6 flex items-center italic underline">
+                            <i class="fas fa-rocket mr-2 text-blue-600"></i> New Global Campaign
+                        </h3>
+                        <div class="space-y-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">Numbers (Comma Separated)</label>
-                                <textarea id="phoneNumbers" rows="3" class="w-full mt-1 p-2 border rounded focus:ring-2 focus:ring-blue-500" placeholder="919773XXXX, 917290XXXX"></textarea>
+                                <label class="block text-xs font-black text-slate-500 uppercase mb-2">Target Numbers (Comma Separated)</label>
+                                <textarea id="phoneNumbers" rows="4" class="w-full p-4 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-blue-400 font-mono text-sm" placeholder="917290977231, 15551234567"></textarea>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-600">Message/Caption</label>
-                                <textarea id="messageBody" rows="4" class="w-full mt-1 p-2 border rounded" placeholder="Hello {{name}}, your loan amount is {{amount}}..."></textarea>
+                                <label class="block text-xs font-black text-slate-500 uppercase mb-2">Message Description</label>
+                                <textarea id="messageBody" rows="5" class="w-full p-4 bg-slate-50 border rounded-xl focus:ring-2 focus:ring-blue-400" placeholder="Hello {{name}}, Welcome to Smile Financial Solution..."></textarea>
                             </div>
-                            <button onclick="sendCampaign()" class="w-full bg-green-600 text-white font-bold py-2 rounded hover:bg-green-700 transition">
-                                <i class="fas fa-paper-plane mr-2"></i> Start Campaign
+                            <button onclick="runBulkCampaign()" class="w-full bg-slate-900 text-white font-black py-4 rounded-xl hover:bg-blue-600 shadow-lg transform active:scale-95 transition-all">
+                                EXECUTE BROADCAST <i class="fas fa-bolt ml-2 text-yellow-400"></i>
                             </button>
                         </div>
                     </div>
-
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h3 class="font-bold text-gray-800 mb-4 border-b pb-2">Real-time Activity</h3>
-                        <div class="h-64 overflow-y-auto space-y-3" id="activityLogs">
-                            <p class="text-sm text-gray-500 italic text-center py-10">Waiting for campaign to start...</p>
-                        </div>
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                        <h3 class="font-bold text-slate-800 mb-4 uppercase text-xs tracking-widest text-slate-400">Real-time Logs</h3>
+                        <div id="logStream" class="h-96 overflow-y-auto space-y-2 text-xs">
+                            </div>
                     </div>
                 </div>
-
             </main>
         </div>
     </div>
 
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.1.0/firebase-database-compat.js"></script>
+
     <script>
-        function sendCampaign() {
-            const numbers = document.getElementById('phoneNumbers').value;
-            const message = document.getElementById('messageBody').value;
-            if(!numbers || !message) {
-                alert("Please fill all details!");
-                return;
+        const firebaseConfig = {
+            apiKey: "AIzaSyD3FEfP9Htj3ANvIENwzlNIKZRE7qIYFBc",
+            authDomain: "smile-finance-ai-2026.firebaseapp.com",
+            databaseURL: "https://smile-finance-ai-2026-default-rtdb.firebaseio.com",
+            projectId: "smile-finance-ai-2026",
+            storageBucket: "smile-finance-ai-2026.firebasestorage.app",
+            messagingSenderId: "325593143394",
+            appId: "1:325593143394:web:2b5f3c2404279d4594d93b",
+            measurementId: "G-93L7XN6ECR"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.database();
+
+        // 1. AUTHENTICATION LOGIC
+        function handleLogin() {
+            const email = document.getElementById('userEmail').value;
+            const pass = document.getElementById('userPass').value;
+            auth.signInWithEmailAndPassword(email, pass).catch(e => alert(e.message));
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('login-screen').classList.add('hidden');
+                document.getElementById('main-dashboard').classList.remove('hidden');
+                loadRealtimeSync();
+            } else {
+                document.getElementById('login-screen').classList.remove('hidden');
+                document.getElementById('main-dashboard').classList.add('hidden');
             }
-            // Isme hum baad mein Firebase connection add karenge
-            alert("System Ready: Integrating with Firebase...");
+        });
+
+        function logout() { auth.signOut(); }
+
+        // 2. CAMPAIGN ENGINE
+        function runBulkCampaign() {
+            const numbers = document.getElementById('phoneNumbers').value.split(',');
+            const message = document.getElementById('messageBody').value;
+            const logs = document.getElementById('logStream');
+
+            if(!message || !numbers[0]) return alert("Missing data!");
+
+            numbers.forEach(num => {
+                const phone = num.trim();
+                const ref = db.ref('campaigns').push();
+                
+                ref.set({
+                    to: phone,
+                    content: message,
+                    status: "sent",
+                    timestamp: firebase.database.ServerValue.TIMESTAMP
+                });
+
+                logs.innerHTML = `<div class="p-2 bg-green-50 text-green-700 border-l-4 border-green-500 mb-2">
+                    [QUEUED] Target: +${phone} <br> <span class="text-[10px] text-slate-400">${new Date().toLocaleTimeString()}</span>
+                </div>` + logs.innerHTML;
+            });
+            
+            alert("Global Broadcast Initiated!");
+        }
+
+        // 3. REALTIME SYNC (The "Eyes" of the CRM)
+        function loadRealtimeSync() {
+            // Listen for new messages/replies
+            db.ref('inbox').limitToLast(10).on('child_added', (snapshot) => {
+                const msg = snapshot.val();
+                console.log("New Global Reply:", msg);
+                // Implementation for live notification popup
+            });
+        }
+
+        function showPanel(id) {
+            document.getElementById('panel-title').innerText = id.charAt(0).toUpperCase() + id.slice(1) + " View";
         }
     </script>
 </body>
-</html>
+    </html>
+    
